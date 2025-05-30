@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('./images/d5.jpg');
+            background-size: 110%;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .status-container {
+            position: relative;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            margin: 0;
+            color: black;
+            font-size: 3rem;
+        }
+
+        p {
+            color: black;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-container" id="status-container">
+        <h1>Donation Status</h1>
+        <p id="donation-status">Donation is processing...</p>
+    </div>
+
+    <script>
+    const statusElement = document.getElementById("donation-status");
+
+    const donationStatus = localStorage.getItem("donationStatus");
+
+    if (donationStatus === "accepted") {
+        statusElement.textContent = "Your Donation is accepted... our team will arrive in 30 mins to collect the food. Thank you!";
+    } else if (donationStatus === "declined") {
+        statusElement.textContent = "Sorry, your donation has been declined... As our team was unable to reach you.";
+    } else {
+        statusElement.textContent = "Donation is processing... Please refresh the page to know the status.";
+    }
+
+    localStorage.removeItem("donationStatus");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Donation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: none;
+      color: #fff;
+      padding: 10px 0;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('./images/donations.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .table-container {
+      width: 45%;  
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px); 
+      box-sizing: border-box;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+      margin-bottom: 100px;
+      margin: 50px 0;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold; 
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    form {
+      width: 100%;
+      padding: 10px;
+      text-align: left;
+    }
+
+    input, select, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 5px 0 15px 0;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #a59c94;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 30%;
+      margin: 0 auto;
+    }
+
+    button:hover {
+      background-color: #c0b8b0;
+    }
+
+    input[type="file"] {
+      padding: 5px;
+      width: 90%;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    textarea {
+      height: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background"></div>
+
+  <div class="table-container">
+    <h1>Food Donation Form</h1>
+
+    <form action="submit_donation.php" method="POST" enctype="multipart/form-data">
+      <label for="food-category">Food Category:</label>
+      <select id="food-category" name="food-category" required>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="non-vegetarian">Non-Vegetarian</option>
+      </select>
+
+      <label for="capacity">Capacity (kg):</label>
+      <input type="number" id="capacity" name="capacity" required>
+
+      <label for="location">Location:</label>
+      <textarea id="location" name="location" required></textarea>
+
+      <button type="button" onclick="getLocation()">Share Live Location</button><br><br>
+
+      <label for="donation-date">Date:</label>
+      <input type="date" id="donation-date" name="donation-date" required>
+
+      <label for="expiry-date">Expiry Date:</label>
+      <input type="date" id="expiry-date" name="expiry-date" required>
+
+      <label for="special-instructions">Special Instructions (Optional):</label>
+      <textarea id="special-instructions" name="special-instructions" placeholder="Items"></textarea>
+
+      <label for="food-images">Upload Images:</label>
+      <input type="file" id="food-images" name="food-images" multiple>
+
+      <input type="hidden" id="email" name="email" value="<?php echo $_SESSION['userEmail']; ?>" />
+      <center>
+        <button type="submit">Submit</button>
+      </center>
+    </form>
+
+  </div>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, handleError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const apiKey = 'e52798ba4837417abad4860eb1ab176d';
+      const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (data.results.length > 0) {
+            const address = data.results[0].formatted;
+            document.getElementById("location").value = address;
+          } else {
+            alert("Address not found.");
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching geolocation data:", error);
+          alert("Error fetching location details.");
+        });
+    }
+
+    function handleError(error) {
+      alert("Error getting the location: " + error.message);
+    }
+  </script>
+
+</body>
+</html>

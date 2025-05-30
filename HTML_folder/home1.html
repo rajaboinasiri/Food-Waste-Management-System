@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waste Food Management</title>
+  <link rel="stylesheet" href="stylehome1.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul class="nav-buttons">
+        <li class="dropdown">
+          <span class="email" id="user-email">Email@example.com</span>
+          <div class="dropdown-content" id="dropdown">
+            <a href="#" id="profile-link">Profile</a>
+            <a href="#" id="logout-link">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="slider">
+    <div class="slide-container">
+      <div class="slide">
+        <img src="./images/resizecom_home1 (1).jpg" alt="Food Image 1">
+      </div>
+      <div class="slide">
+        <img src="./images/home2.jpg" alt="Food Image 2">
+      </div>
+      <div class="slide">
+        <img src="./images/home3.jpg" alt="Food Image 3">
+      </div>
+      <div class="slide">
+        <img src="./images/resizecom_home1 (1).jpg" alt="Food Image 1">
+      </div>
+      <div class="slide">
+        <img src="./images/home2.jpg" alt="Food Image 2">
+      </div>
+      <div class="slide">
+        <img src="./images/home3.jpg" alt="Food Image 3">
+      </div>
+    </div>
+  </div>
+
+  <div class="how-it-works">
+    <h2>How it Works</h2>
+    <ul>
+      <li><i class="fas fa-utensils"></i> Share details about your excess food</li>
+      <li><i class="fas fa-clock"></i> We'll collect it within 30 minutes</li>
+      <li><i class="fas fa-map-marker-alt"></i> Food is distributed to those in need</li>
+    </ul>
+
+    <div id="donate-food-btn-container">
+        <button id="donate-food-btn" onclick="donateFood()">Donate Food</button>
+    </div>
+  </div>
+  <button id="chat-button"><i class="fas fa-comments"></i></button>
+
+  <div id="chat-box">
+    <div id="chat-header">
+      <span>Chat</span>
+      <button id="close-chat" style="background: none; color: white; border: none; cursor: pointer;">&times;</button>
+    </div>
+    <div id="chat-body">
+      <p>Select or type your question:</p>
+      <div class="chat-question" onclick="handleQuestion('What is this platform about?')">What is this platform about?</div>
+      <div class="chat-question" onclick="handleQuestion('How does food collection work?')">How does food collection work?</div>
+      <div class="chat-question" onclick="handleQuestion('How can I track my donation?')">How can I track my donation?</div>
+      <div class="chat-question" onclick="handleQuestion('What happens after collection?')">What happens after collection?</div>
+    </div>
+    <div id="chat-input">
+      <input type="text" id="user-input" placeholder="Type your question">
+      <button onclick="processInput()">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Waste Food Management. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const email = localStorage.getItem('userEmail');
+    if (email) {
+        document.getElementById("user-email").textContent = email;
+    }
+
+      document.getElementById('profile-link').addEventListener('click', function () {
+        window.location.href = 'profile.php';
+      });
+
+      document.getElementById('logout-link').addEventListener('click', function () {
+        localStorage.clear();
+        window.location.href = 'index.html';
+      });
+
+      const donateButton = document.getElementById('donate-food-btn');
+      donateButton.addEventListener('mouseenter', () => {
+        donateButton.style.backgroundColor = '#a59c94';
+      });
+
+      donateButton.addEventListener('mouseleave', () => {
+        donateButton.style.backgroundColor = '#c0b8b0';
+      });
+    });
+
+    function donateFood() {
+      window.location.href = 'donate.html';
+    }
+  </script>
+  <script>
+  const chatButton = document.getElementById('chat-button');
+const chatBox = document.getElementById('chat-box');
+const closeChat = document.getElementById('close-chat');
+const userInput = document.getElementById('user-input');
+const chatBody = document.getElementById('chat-body');
+
+const questionsAndAnswers = [
+    { question: "What is this platform about?", keywords: ["platform"], answer: "This platform connects donors with those in need by facilitating food donations." },
+    { question: "How does food collection work?", keywords: ["work","works"], answer: "Once you share details of your excess food, we collect it within 30 minutes." },
+    { question: "How can I track my donation?", keywords: ["track"], answer: "You can track your donation via the tracking ID sent after scheduling a pickup." },
+    { question: "What happens after collection?", keywords: ["happens", "collection"], answer: "The food is distributed to nearby NGOs and shelters for those in need." },
+    { question: "Can I schedule a donation for later?", keywords: ["schedule"], answer: "Yes, you can schedule a pickup for a later time that is convenient for you." },
+    { question: "What types of food can I donate?", keywords: ["types"], answer: "You can donate fresh meals, groceries, and non-perishable food items that are safe for consumption." },
+    { question: "Is there a cost for donation pickup?", keywords: ["cost", "pickup"], answer: "No, the pickup service is completely free for donors." },
+    { question: "Who are the beneficiaries of the donations?", keywords: ["beneficiaries", "benifits"], answer: "The donations are distributed to local NGOs, shelters, and food-insecure individuals in the community." },
+    { question: "How do you ensure food safety during collection?", keywords: ["safety",], answer: "We use insulated containers and follow hygiene protocols to maintain food safety during collection and transport." },
+    { question: "Can I donate partially consumed food?", keywords: ["partially", "consumed"], answer: "We only accept unopened, fresh, and consumable food to ensure the safety of the recipients." },
+    { question: "What regions do you operate in?", keywords: ["regions", "operate"], answer: "Currently, we operate in India. We’re expanding our network to cover more areas." },
+    { question: "How can I volunteer with the platform?", keywords: ["volunteer"], answer: "You can register as a volunteer on our website or mobile app under the 'Volunteer' section." },
+    { question: "What happens if I need to cancel a scheduled donation?", keywords: ["cancel", "scheduled"], answer: "You can cancel a scheduled donation by contacting our support team." },
+    { question: "Do I receive confirmation after donation?", keywords: ["receive", "confirmation"], answer: "Yes, you’ll receive a confirmation email or message with details of your contribution." },
+    { question: "How do you track the impact of donations?", keywords: ["track", "impact"], answer: "We provide detailed reports on how your donations have been utilized to help those in need." },
+    { question: "What is the minimum quantity of food required to donate?", keywords: ["minimum", "quantity",], answer: "There’s no minimum quantity. Every contribution, big or small, helps." },
+    { question: "Can businesses donate food?", keywords: ["businesses"], answer: "Yes, businesses, restaurants, and event organizers can contribute surplus food through our platform." },
+    { question: "How do I contact customer support?", keywords: ["contact", "customer", "support"], answer: "You can contact our support team via email, phone, or live chat on the website." },
+    { question: "What is the response time for pickups?", keywords: ["response", "time"], answer: "Our team usually arrives within 30 minutes to an hour, depending on your location." }
+  ];
+
+chatButton.addEventListener('click', () => {
+  chatBox.style.display = 'flex';
+  chatButton.style.display = 'none';
+});
+
+closeChat.addEventListener('click', () => {
+  chatBox.style.display = 'none';
+  chatButton.style.display = 'flex';
+});
+
+function processInput() {
+  const userInputText = userInput.value.trim().toLowerCase();
+  userInput.value = '';
+
+  const userMessage = document.createElement('div');
+  userMessage.style.textAlign = 'right';
+  userMessage.style.margin = '10px 0';
+  userMessage.innerHTML = `<span style="background: #a59c94; color: white; padding: 10px; border-radius: 10px; display: inline-block;">${userInputText}</span>`;
+  chatBody.appendChild(userMessage);
+
+  let matchedAnswer = null;
+
+  for (const { keywords, answer } of questionsAndAnswers) {
+    if (keywords.some(keyword => userInputText.includes(keyword))) {
+      matchedAnswer = answer;
+      break;
+    }
+  }
+
+  if (matchedAnswer) {
+    displayAnswer(matchedAnswer);
+  } else {
+    clearPreviousButtons();
+    displayQuestionButtons();
+  }
+}
+
+function clearPreviousButtons() {
+  const existingButtons = chatBody.querySelectorAll('.question-buttons');
+  existingButtons.forEach(buttonsContainer => buttonsContainer.remove());
+}
+
+function displayAnswer(answer) {
+  const answerMessage = document.createElement('div');
+  answerMessage.style.textAlign = 'left';
+  answerMessage.style.margin = '10px 0';
+  answerMessage.innerHTML = `<span style="background: #f0f0f0; color: #333; padding: 10px; border-radius: 10px; display: inline-block;">${answer}</span>`;
+  chatBody.appendChild(answerMessage);
+}
+
+function displayQuestionButtons() {
+  const buttonsContainer = document.createElement('div');
+  buttonsContainer.className = 'question-buttons';
+  buttonsContainer.style.textAlign = 'left';
+  buttonsContainer.style.marginTop = '10px';
+
+  questionsAndAnswers.forEach(({ question }) => {
+    const button = document.createElement('button');
+    button.innerText = question;
+    button.style.margin = '5px';
+    button.style.padding = '10px';
+    button.style.backgroundColor = '#f0f0f0';
+    button.style.color = '#333';
+    button.style.border = 'none';
+    button.style.borderRadius = '5px';
+    button.style.cursor = 'pointer';
+
+    button.addEventListener('click', () => {
+      handleQuestion(question);
+    });
+
+    buttonsContainer.appendChild(button);
+  });
+
+  chatBody.appendChild(buttonsContainer);
+}
+
+function handleQuestion(question) {
+  const userMessage = document.createElement('div');
+  userMessage.style.textAlign = 'right';
+  userMessage.style.margin = '10px 0';
+  userMessage.innerHTML = `<span style="background: #a59c94; color: white; padding: 10px; border-radius: 10px; display: inline-block;">${question}</span>`;
+  chatBody.appendChild(userMessage);
+
+  const answer = questionsAndAnswers.find(q => q.question === question).answer;
+  displayAnswer(answer);
+}
+
+</script>
+</body>
+</html>

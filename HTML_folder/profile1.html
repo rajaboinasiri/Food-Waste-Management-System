@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styleprofile1.css">
+    <style>
+        body {
+            background-color: #c0b8b0; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        
+        .back-btn-container {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        .back-btn-container a {
+            text-decoration: none;
+            font-size: 20px;  
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .back-btn-container a:hover {
+            background-color: #dcdcdc;
+            color: black;
+        }
+
+        
+        .profile-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        
+        .profile-container {
+            background-color: white; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px; 
+        }
+
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        td {
+            text-align: left;
+            font-size: 16px;
+        }
+
+        
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button to Return to Home -->
+    <div class="back-btn-container">
+        <a href="home2.html">&#8592; Back</a>
+    </div>
+
+    <!-- Profile Information Display -->
+    <div class="profile-wrapper">
+        <div class="profile-container">
+            <h2>User Profile</h2>
+
+            <table>
+                <tr>
+                    <th>Email</th>
+                    <td id="user-email"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            document.getElementById('user-email').innerText = localStorage.getItem('userEmail');
+        };
+    </script>
+
+</body>
+</html>

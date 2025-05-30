@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waste Food Management</title>
+  <link rel="stylesheet" href="stylehome2.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul class="nav-buttons">
+        <li class="dropdown">
+          <span class="email" id="user-email">Email@example.com</span>
+          <div class="dropdown-content" id="dropdown">
+            <a href="#" id="profile-link">Profile</a>
+            <a href="#" id="logout-link">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="slider">
+    <div class="slide-container">
+      <div class="slide">
+        <img src="./images/resizecom_home1 (1).jpg" alt="Food Image 1">
+      </div>
+      <div class="slide">
+        <img src="./images/home2.jpg" alt="Food Image 2">
+      </div>
+      <div class="slide">
+        <img src="./images/home3.jpg" alt="Food Image 3">
+      </div>
+    </div>
+  </div>
+
+  <div class="how-it-works">
+    <h2>How it Works</h2>
+    <ul>
+      <li><i class="fas fa-utensils"></i> Share details about your excess food</li>
+      <li><i class="fas fa-clock"></i> We'll collect it within 30 minutes</li>
+      <li><i class="fas fa-map-marker-alt"></i> Food is distributed to those in need</li>
+    </ul>
+
+    <div id="donate-food-btn-container">
+        <button id="donate-food-btn" onclick="donateFood()">Donate Food</button>
+    </div>
+  </div>
+
+  <div id="donation-status">Waiting for your donation status...</div>
+
+  <footer>
+    <p>© 2025 Waste Food Management. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const email = localStorage.getItem('userEmail');
+      if (email) {
+        document.getElementById('user-email').textContent = email;
+      }
+
+      document.getElementById('profile-link').addEventListener('click', function () {
+        window.location.href = 'profile1.html';
+      });
+
+      document.getElementById('logout-link').addEventListener('click', function () {
+        localStorage.clear();
+        window.location.href = 'index.html';
+      });
+
+      const donateButton = document.getElementById('donate-food-btn');
+      donateButton.addEventListener('mouseenter', () => {
+        donateButton.style.backgroundColor = '#a59c94';
+      });
+
+      donateButton.addEventListener('mouseleave', () => {
+        donateButton.style.backgroundColor = '#c0b8b0';
+      });
+
+      window.addEventListener("storage", function(event) {
+        if (event.key === 'donationAccepted') {
+            alert("Your donation has been accepted!");
+            document.getElementById("donation-status").textContent = "Your donation has been accepted!";
+        }
+      });
+    });
+
+    function donateFood() {
+      window.location.href = 'donate.html';
+    }
+  </script>
+</body>
+</html>

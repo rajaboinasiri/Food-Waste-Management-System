@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styleregister.css">
+</head>
+<body>
+    <div class="register-wrapper">
+        <div class="register-container">
+            <div class="image-container">
+                <img src="./images/register.PNG" alt="Food Image">
+            </div>
+
+            <div class="form-container">
+                <h2>Register</h2>
+                <form id="register-form" action="register.php" method="POST" onsubmit="return validateForm()">
+                    <table>
+                        <tr>
+                            <td><label for="name">Name:</label></td>
+                            <td><input type="text" id="name" name="name" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">Email:</label></td>
+                            <td><input type="email" id="email" name="email" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="contact">Contact Number:</label></td>
+                            <td><input type="text" id="contact" name="contact" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="otp">Send OTP:</label></td>
+                            <td><button type="button" id="send-otp-button" onclick="sendOtp()">Send OTP</button></td>
+                        </tr>
+                        <tr id="otp-row" style="display:none;">
+                            <td><label for="otp">Enter OTP:</label></td>
+                            <td><input type="text" id="otp" name="otp" required></td>
+                        </tr>
+                        <tr id="verify-otp-row" style="display:none;">
+                            <td><button type="button" id="verify-otp-button" onclick="verifyOtp()">Verify OTP</button></td>
+                        </tr>
+                        <tr id="password-row" style="display:none;">
+                            <td><label for="password">Password:</label></td>
+                            <td><input type="password" id="password" name="password" required></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Register" id="register-btn" disabled>
+                    <div id="success-message" style="margin-top: 10px;"></div> <!-- Success message displayed here -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styleprofile.css">
+    <style>
+        body {
+            background-color: #c0b8b0; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+       
+        .back-btn-container {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        .back-btn-container a {
+            text-decoration: none;
+            font-size: 20px; 
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .back-btn-container a:hover {
+            background-color: #dcdcdc;
+            color: black;
+        }
+
+       
+        .profile-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+        }
+
+        
+        .profile-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px; 
+        }
+
+       
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        td {
+            text-align: left;
+            font-size: 16px;
+        }
+
+       
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button to Return to Home -->
+    <div class="back-btn-container">
+        <a href="home1.html">&#8592; Back</a>
+    </div>
+
+    <!-- Profile Information Display -->
+    <div class="profile-wrapper">
+        <div class="profile-container">
+            <h2>User Profile</h2>
+
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td id="user-name"></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td id="user-email"></td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td id="user-phone"></td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td id="user-address"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+   
+    const userEmail = localStorage.getItem('userEmail');
+
+    if (!userEmail) {
+        alert("No user is signed in.");
+        return;
+    }
+
+   
+    fetch(`getUserDetails.php?email=${encodeURIComponent(userEmail)}`)
+        .then((response) => response.json())
+        .then((data) => {
+            if (Object.keys(data).length === 0) {
+                alert("User details not found.");
+                return;
+            }
+
+            
+            document.getElementById('user-name').innerText = data.name || "N/A";
+            document.getElementById('user-email').innerText = data.email || "N/A";
+            document.getElementById('user-phone').innerText = data.contact || "N/A";
+            document.getElementById('user-address').innerText = data.address || "N/A";
+        })
+        .catch((error) => {
+            console.error("Error fetching user details:", error);
+            alert("Unable to load user details. Please try again.");
+        });
+    };
+
+    </script>
+
+</body>
+</html>
