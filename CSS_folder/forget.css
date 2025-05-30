@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c0b8b0; /* Set background color */
+}
+
+.signin-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signin-container {
+    display: flex;
+    justify-content: center; /* Ensure content is centered horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100%;
+}
+
+.form-container {
+    width: 40%; /* Reduced width of the form container */
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center the form elements horizontally */
+}
+
+form {
+    margin-top: 25px;
+    width: 100%; /* Ensures form takes up full width inside .form-container */
+}
+
+form table {
+    width: 100%; /* Form will take up the full width of its container */
+    background-color: white; /* Set table background color to white */
+    border-radius: 5px; /* Rounded corners */
+    border: 2px solid white; /* Increased border width to 2px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: for shadow effect */
+    padding: 10px; /* Added padding to give space around the table's content */
+}
+
+form table td {
+    padding: 15px; /* Increased padding for more spacing between the borders */
+}
+
+form table th {
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+    color: #333; /* Dark color for heading text */
+    background-color: #f1f1f1; /* Light background for heading row */
+}
+
+form input[type="email"],
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px; /* Increase padding inside input fields */
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #eae7e5; /* Initial button color */
+    color: black;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+form button:hover {
+    background-color: #a59c94; /* Button color on hover */
+}
+
+#error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}

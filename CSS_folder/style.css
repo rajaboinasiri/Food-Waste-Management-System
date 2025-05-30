@@ -1,0 +1,299 @@
+/* General Styles */
+:root {
+  --primary-color: #c0b8b0;
+  --button-hover: #a59c94;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+/* Navigation Bar */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgba(192, 184, 176, 0.8);
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+.nav-buttons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.button {
+  text-decoration: none;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+  background-color: var(--button-hover);
+  color: #fff;
+}
+
+/* Main Content */
+.image-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./images/main.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px); /* Blur the background image */
+  z-index: 0;
+}
+
+.main-content {
+  display: flex;
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  padding: 20px;
+  position: relative;
+  margin-top: 50px;
+  height: calc(100vh - 50px - 50px);
+  margin-bottom: 15rem;
+}
+.site-title {
+  font-size: 4.3rem; /* Larger size */
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  top: -35px;
+}
+
+.main-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+  position: relative;
+  top: -40px;
+}
+
+.theme-description {
+  font-size: 22px;
+  max-width: 80%;
+  margin-top: 20px;
+  color: #fff;
+  position: relative;
+  top: -35px;
+}
+
+/* Scrolling Image Section */
+.carousel-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10rem;
+  margin-bottom: 7rem;
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel img {
+  width: calc(33.33% - 45px);
+  max-width: 350px;
+  height: auto;
+  object-fit: cover;
+  margin-right: 3.5cm;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Footer */
+footer {
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+.contact-details {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-top: 30px;
+  background-color: rgba(192, 184, 176, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.contact-details p {
+  margin: 10px 0;
+}
+
+.contact-details .icons a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 10px;
+  font-size: 1.5rem;
+}
+
+.contact-details .icons a:hover {
+  color: #ffb400;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .main-title {
+    font-size: 32px;
+  }
+
+  .theme-description {
+    font-size: 16px;
+  }
+
+  .button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  .alternate-images {
+    height: 1000px; /* Reduced height for smaller screens */
+    width: 80%; /* Adjust width to make images more centered */
+  }
+
+  .alternate-images img {
+    width: 150px; /* Smaller images for mobile */
+  }
+
+  .alternate-images img:nth-child(2) {
+    top: 200px;
+    left: 50%;
+  }
+
+  .alternate-images img:nth-child(3) {
+    top: 400px;
+    left: 50%;
+  }
+
+  .alternate-images img:nth-child(4) {
+    top: 600px;
+    left: 50%;
+  }
+
+  .alternate-images img:nth-child(5) {
+    top: 800px;
+    left: 50%;
+  }
+
+  .alternate-images-section {
+    margin-bottom: 5rem; /* Add gap after the last image and before the footer */
+  }
+}
+
+/* Section for Alternating Images */
+.alternate-images-section {
+  margin: 4rem 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.alternate-images {
+  position: relative;
+  width: 70%; /* Reduced width to center the images */
+  height: 1500px; /* Adjusted height to fit more balanced spacing */
+}
+
+.alternate-images img {
+  position: absolute;
+  width: 350px; /* Set the width of images */
+  height: auto;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Adjust positions to create alternating effect */
+.alternate-images img:nth-child(1) {
+  top: 0;
+  left: 2.5cm;
+}
+
+.alternate-images img:nth-child(2) {
+  top: 350px;
+  right: 2cm;
+  transform: translateX(0);
+}
+
+.alternate-images img:nth-child(3) {
+  top: 700px;
+  left: 2cm;
+}
+
+.alternate-images img:nth-child(4) {
+  top: 1050px;
+  right: 2cm; /* Adjusted right alignment */
+  transform: translateX(0); /* Removed the previous transform for correct positioning */
+}
+
+.alternate-images img:nth-child(5) {
+  top: 1400px;
+  left: 2cm; /* Adjusted right alignment */
+  transform: translateX(0); /* Removed the previous transform for correct positioning */
+}
+
+/* Added 3 to 4 lines of gap before contact details and footer */
+.alternate-images-section {
+  margin-bottom: 30rem; /* Adjust the gap after the images */
+}
+/* Contributions Section */
+.contributions-section {
+  text-align: center;
+  margin: 4rem 2rem;
+}
+
+.contributions-box {
+  background-color: #fff; /* Set background color */
+  padding: 15px;
+  display: inline-block;
+  border-radius: 7.5px; /* Optional: for rounded corners */
+}
+
+.contributions-title {
+  font-size: 60px;
+  color: #5d554e; /* White text */
+  margin: 0; /* Remove default margin */
+}
